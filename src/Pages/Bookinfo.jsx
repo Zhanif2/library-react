@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Rating from "../Components/ui/Rating";
 import Price from "../Components/ui/Price";
@@ -7,15 +7,20 @@ import Book from "../Components/ui/Book";
 
 const Bookinfo = ({ books, addToCart, cart }) => {
   const { id } = useParams();
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  useEffect(() => {
+    setAddedToCart(cart?.some((book) => book.id === +id));
+  }, [cart, id]);
+
+  const handleAddToCart = () => {
+    const selectedBook = books.find((book) => +book.id === +id);
+    addToCart(selectedBook); 
+    setAddedToCart(true);
+  };
+
+
   const book = books.find((book) => +book.id === +id);
-
-  function addBookToCart(book) {
-    addToCart(book);
-  }
-
-  function bookExistsOnCart() {
-    return cart?.find((book) => book.id === +id);
-  }
 
   return (
     <div id="books__body">
@@ -58,10 +63,12 @@ const Bookinfo = ({ books, addToCart, cart }) => {
                     recusandae itaque architecto omnis, eligendi veniam.
                   </p>
                 </div>
-                {bookExistsOnCart() ? (
+                {addedToCart ? (
+                  <Link to={`/cart`} className="book__link">
                   <button className="btn">Checkout</button>
+                  </Link>
                 ) : (
-                  <button className="btn" onClick={() => addBookToCart(book)}>
+                  <button className="btn" onClick={handleAddToCart}>
                     Add to cart
                   </button>
                 )}
