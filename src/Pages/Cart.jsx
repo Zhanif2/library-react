@@ -1,6 +1,6 @@
 import React from "react";
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, changeQuantity }) => {
   return (
     <div id="books__body">
       <main id="books__main">
@@ -39,6 +39,8 @@ const Cart = ({ cart }) => {
                           min={0}
                           max={99}
                           className="cart__input"
+                          value={book.quantity}
+                          onChange={(event) => changeQuantity(book, event.target.value)}
                         />
                       </div>
                       <div className="cart__total">£17.99</div>
