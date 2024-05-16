@@ -53,7 +53,7 @@ const Nav = ({numberOfItems}) => {
                     </li>
                     <li className="menu__list">
                         <Link to="/books" className="menu__link">
-                            Book
+                            Books
                         </Link>
                     </li>
                     <li className="menu__list">
