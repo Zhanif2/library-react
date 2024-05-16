@@ -10,7 +10,7 @@ const Explore = () => {
                     Explore more <span className="purple">Books</span>
                 </h2>
                 <Link to="/books">
-                    <button className="btn">Explore book</button>
+                    <button className="btn">Explore books</button>
                 </Link>
             </div>
         </div>
